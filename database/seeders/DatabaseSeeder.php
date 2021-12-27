@@ -21,5 +21,7 @@ class DatabaseSeeder extends Seeder
             'password' => \bcrypt('password')
         ]);
         User::factory(100)->create();
+        $this->call(CategorySeeder::class);
+        $this->call(ProductSeeder::class);
     }
 }

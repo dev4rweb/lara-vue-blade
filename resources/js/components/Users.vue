@@ -1,5 +1,15 @@
 <template>
     <div>
+        <div class="form-group">
+            <label>Search</label>
+            <input
+                class="form-control"
+                type="search"
+                v-model="search_name"
+                @change="searching"
+                @click="canceled"
+            >
+        </div>
         <form v-if="!editedUser" @submit.prevent="createUser">
             <div class="form-group">
                 <label>User Name</label>
@@ -68,7 +78,8 @@ export default {
                email: 'b@gmail.com',
                password: 'password'
            },
-           editedUser: null
+           editedUser: null,
+           search_name: ''
        }
     },
     methods: {
@@ -146,6 +157,23 @@ export default {
         backToCreating() {
             console.log('backToCreating')
             this.editedUser = null
+        },
+        searching() {
+            console.log('searching', this.search_name)
+            axios.get(`/api/users?search_name=${this.search_name}`)
+                .then(res => {
+                    console.log('getAllUsers res',res)
+                    if (res.data.success) {
+                        this.users = res.data.models
+                    }
+                })
+                .catch(err => {
+                    console.log('getAllUsers err',err.response.data)
+                });
+        },
+        canceled() {
+            console.log('cancel')
+            this.getAllUsers()
         }
     },
     mounted() {

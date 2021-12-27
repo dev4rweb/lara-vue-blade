@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Filters\UserFilter;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,10 +14,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+//    public function index()
+    public function index(UserFilter $request)
     {
         try {
-            $users = User::all();
+            $users = User::filter($request)->get();
             $response['success'] = true;
             $response['message'] = 'All Users';
             $response['models'] = $users;
