@@ -36,6 +36,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        <div class="row">Found {{count($products)}}</div>
         <div class="row mt-5">
             @foreach($products as $product)
                 <div class="col-lg-4">
@@ -50,5 +51,6 @@
             @endforeach
         </div>
         {{$products->withQueryString()->links('pagination.bootstrap-4')}}
+
     </div>
 @endsection

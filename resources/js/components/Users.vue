@@ -1,5 +1,6 @@
 <template>
     <div>
+        <loading v-if="is_loading"/>
         <div class="form-group">
             <label>Search</label>
             <input
@@ -71,35 +72,36 @@
 export default {
     name: "Users",
     data() {
-       return {
-           users: [],
-           user: {
-               name: 'userB',
-               email: 'b@gmail.com',
-               password: 'password'
-           },
-           editedUser: null,
-           search_name: ''
-       }
+        return {
+            users: [],
+            user: {
+                name: 'userB',
+                email: 'b@gmail.com',
+                password: 'password'
+            },
+            editedUser: null,
+            search_name: '',
+            is_loading: false
+        }
     },
     methods: {
         getAllUsers() {
             axios.get('/api/users')
                 .then(res => {
-                    console.log('getAllUsers res',res)
+                    console.log('getAllUsers res', res)
                     if (res.data.success) {
                         this.users = res.data.models
                     }
                 })
                 .catch(err => {
-                    console.log('getAllUsers err',err.response.data)
+                    console.log('getAllUsers err', err.response.data)
                 });
         },
         createUser() {
             console.log('create User', this.user)
             axios.post('/api/users', this.user)
                 .then(res => {
-                    console.log('createUser res',res)
+                    console.log('createUser res', res)
                     if (res.data.success) {
                         this.users.push(res.data.model)
                         this.user.name = ''
@@ -107,7 +109,7 @@ export default {
                     }
                 })
                 .catch(err => {
-                    console.log('createUser err',err.response.data)
+                    console.log('createUser err', err.response.data)
                 });
         },
         showUser(user) {
@@ -159,16 +161,20 @@ export default {
             this.editedUser = null
         },
         searching() {
+            this.is_loading = true
             console.log('searching', this.search_name)
-            axios.get(`/api/users?search_name=${this.search_name}`)
+            axios.get(`/api/users?search_name=${this.search_name}&role_id=0`)
                 .then(res => {
-                    console.log('getAllUsers res',res)
+                    console.log('getAllUsers res', res)
                     if (res.data.success) {
                         this.users = res.data.models
                     }
                 })
                 .catch(err => {
-                    console.log('getAllUsers err',err.response.data)
+                    console.log('getAllUsers err', err.response.data)
+                })
+                .finally(() => {
+                    this.is_loading = false
                 });
         },
         canceled() {
@@ -177,7 +183,7 @@ export default {
         }
     },
     mounted() {
-        this.getAllUsers()
+        this.searching()
     }
 }
 </script>
