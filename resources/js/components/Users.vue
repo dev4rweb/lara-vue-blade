@@ -50,7 +50,7 @@
             <button type="submit" class="btn btn-warning">Change</button>
             <button type="button" @click="backToCreating" class="btn btn-info">Back</button>
         </form>
-        <p>Found {{users.length}} users</p>
+        <p v-if="pagination">Found {{pagination.total}} users</p>
         <ul class="list-group">
             <li
                 class="list-group-item d-flex justify-content-between align-items-center"
@@ -65,6 +65,35 @@
                 </button>
             </li>
         </ul>
+        <nav v-if="pagination" aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li
+                    class="page-item"
+                    v-for="link in pagination.links"
+                    :class="{'active': link.active, 'disabled': link.url === null} "
+                    @click="paginationClick(link)"
+                >
+                    <button
+                        class="page-link"
+                        v-if="link.label.includes('Previous')"
+                        aria-label="Previous"
+                    >
+                        <span aria-hidden="true">
+                            &laquo;
+                        </span>
+                    </button>
+
+                    <button
+                        class="page-link"
+                        v-else-if="link.label.includes('Next')"
+                        aria-label="Next"
+                    >
+                        <span aria-hidden="true">&raquo;</span>
+                    </button>
+                    <button v-else class="page-link">{{ link.label }}</button>
+                </li>
+            </ul>
+        </nav>
     </div>
 </template>
 
@@ -81,7 +110,9 @@ export default {
             },
             editedUser: null,
             search_name: '',
-            is_loading: false
+            is_loading: false,
+            pagination: null,
+            current_page: 1
         }
     },
     methods: {
@@ -90,7 +121,7 @@ export default {
                 .then(res => {
                     console.log('getAllUsers res', res)
                     if (res.data.success) {
-                        this.users = res.data.models
+                        this.users = res.data.models.data
                     }
                 })
                 .catch(err => {
@@ -163,11 +194,12 @@ export default {
         searching() {
             this.is_loading = true
             console.log('searching', this.search_name)
-            axios.get(`/api/users?search_name=${this.search_name}&role_id=0`)
+            axios.get(`/api/users?page=${this.current_page}&search_name=${this.search_name}&role_id=0`)
                 .then(res => {
-                    console.log('getAllUsers res', res)
+                    console.log('searching res', res)
                     if (res.data.success) {
-                        this.users = res.data.models
+                        this.users = res.data.models.data
+                        this.pagination = res.data.models
                     }
                 })
                 .catch(err => {
@@ -176,6 +208,21 @@ export default {
                 .finally(() => {
                     this.is_loading = false
                 });
+        },
+        paginationClick(link) {
+            // console.log('paginationClick', link)
+            if (link.label.includes('Previous')) {
+                if (link.url)
+                    this.current_page--
+                else return
+            } else if (link.label.includes('Next')) {
+                if (link.url)
+                    this.current_page++
+                else return
+            } else {
+                this.current_page = parseInt(link.label)
+            }
+            this.searching()
         },
         canceled() {
             console.log('cancel')

@@ -18,7 +18,8 @@ class UserController extends Controller
     public function index(UserFilter $request)
     {
         try {
-            $users = User::filter($request)->get();
+//            $users = User::filter($request)->get();
+            $users = User::filter($request)->paginate(10);
             $response['success'] = true;
             $response['message'] = 'All Users';
             $response['models'] = $users;
