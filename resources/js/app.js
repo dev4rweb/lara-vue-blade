@@ -7,6 +7,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue').default;
+import router from "./router";
 
 /**
  * The following block of code may be used to automatically register your
@@ -23,6 +24,11 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('test-component', require('./components/TestComponent').default);
 Vue.component('users', require('./components/Users').default);
 Vue.component('loading', require('./components/LoadingComponent').default);
+Vue.component('todo', require('./components/Todo').default);
+Vue.component('todo-list', require('./components/TodoList').default);
+Vue.component('todo-item', require('./components/TodoItem').default);
+Vue.component('add-todo', require('./components/AddTodo').default);
+Vue.component('loader', require('./components/Loader').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -32,4 +38,5 @@ Vue.component('loading', require('./components/LoadingComponent').default);
 
 const app = new Vue({
     el: '#app',
+    router
 });

@@ -11,13 +11,13 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Active</a>
+                    <a class="nav-link active" href="{{route('product-page')}}">Products Ajax</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{'/products'}}">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="{{route('todo-page')}}">To do</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled">Disabled</a>

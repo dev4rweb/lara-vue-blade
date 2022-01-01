@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductsPageController;
+use App\Http\Controllers\TodoPageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +25,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [HomePageController::class, 'index'])->name('home-page');
+Route::get('/products-page', [ProductsPageController::class, 'index'])->name('product-page');
+Route::get('/todo', [TodoPageController::class, 'index'])->name('todo-page');
 Route::resources([
     'products' => ProductController::class
 ]);
