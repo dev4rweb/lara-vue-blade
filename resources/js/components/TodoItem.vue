@@ -10,7 +10,7 @@
                 @change="todo.completed = !todo.completed"
             >
             <strong class="me-1">{{index + 1}}</strong>
-            {{todo.title}}
+            {{todo.title | uppercase}}
         </span>
         <button
             class="btn btn-sm btn-outline-danger rounded-circle"
@@ -30,6 +30,12 @@ export default {
             required: true
         },
         index: Number
+    },
+    filters: {
+        uppercase(value) {
+            // console.log(value)
+            return value.toUpperCase()
+        }
     }
 }
 </script>
