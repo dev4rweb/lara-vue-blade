@@ -4,6 +4,7 @@ use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsPageController;
 use App\Http\Controllers\TodoPageController;
+use App\Http\Controllers\VuexPageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/', [HomePageController::class, 'index'])->name('home-page');
 Route::get('/products-page', [ProductsPageController::class, 'index'])->name('product-page');
 Route::get('/todo', [TodoPageController::class, 'index'])->name('todo-page');
+Route::get('/vuex-page', [VuexPageController::class, 'index'])->name('vuex-page');
 Route::resources([
     'products' => ProductController::class
 ]);

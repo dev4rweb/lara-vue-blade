@@ -8,6 +8,7 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 import router from "./router";
+import store from './store/index'
 
 /**
  * The following block of code may be used to automatically register your
@@ -29,6 +30,8 @@ Vue.component('todo-list', require('./components/TodoList').default);
 Vue.component('todo-item', require('./components/TodoItem').default);
 Vue.component('add-todo', require('./components/AddTodo').default);
 Vue.component('loader', require('./components/Loader').default);
+Vue.component('vuex-page', require('./views/Vuex-Page').default);
+Vue.component('post-form', require('./components/PostForm').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -38,5 +41,6 @@ Vue.component('loader', require('./components/Loader').default);
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    store
 });

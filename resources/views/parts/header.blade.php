@@ -20,7 +20,7 @@
                     <a class="nav-link" href="{{route('todo-page')}}">To do</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
+                    <a class="nav-link" href="{{route('vuex-page')}}">Vuex</a>
                 </li>
             </ul>
 
