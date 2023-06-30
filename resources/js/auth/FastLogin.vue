@@ -34,7 +34,7 @@ export default {
                 window.location.href = '/home'
             }).catch(err => {
                 console.error('fastLoginHandler err', err)
-                this.message = 'Ошибка'
+                this.message = err.data.message
             });
         }
     }
