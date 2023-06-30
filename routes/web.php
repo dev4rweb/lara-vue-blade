@@ -33,5 +33,5 @@ Route::resources([
     'products' => ProductController::class
 ]);
 Route::middleware('web')->as('fastlogin')->prefix('fastlogin')->group(function () {
-    Route::post('login/details', [\App\Http\Controllers\FastAuthController::class, 'loginDetails'])->name('.login.details');
+    Route::post('login/details', [\App\Http\Controllers\FastAuthController::class, 'login'])->name('.login.details');
 });

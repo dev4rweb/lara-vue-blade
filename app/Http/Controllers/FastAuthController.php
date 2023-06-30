@@ -27,13 +27,16 @@ class FastAuthController extends FastLoginController
             throw new UnauthorizedException('FastLogin: Failed validating request', 422);
         }
 
-        /*try {
+        $response['message'] = $request->all();
+        return response()->json($response);
+
+        try {
             $response = $loginValidator->check($request->cookie(FastLoginServiceProvider::FASTLOGIN_COOKIE), $credentials, $requestOptions, $credentialRequest, null, [$requestOptions->getRpId()]);
         } catch (InvalidArgumentException $e) {
             throw new UnauthorizedException('FastLogin: Failed validating request', 422, $e);
-        }*/
+        }
 
-        $authenticatable = Auth::loginUsingId(Auth::id());
+        $authenticatable = Auth::loginUsingId(intval($response->getUserHandle()));
 
         if ($authenticatable instanceof Authenticatable) {
             // Dispatch event that we have logged in via FastLogin.
