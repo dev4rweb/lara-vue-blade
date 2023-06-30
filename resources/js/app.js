@@ -32,6 +32,8 @@ Vue.component('add-todo', require('./components/AddTodo').default);
 Vue.component('loader', require('./components/Loader').default);
 Vue.component('vuex-page', require('./views/Vuex-Page').default);
 Vue.component('post-form', require('./components/PostForm').default);
+Vue.component('fast-registration', require('./auth/FastRegistration').default);
+Vue.component('fast-login', require('./auth/FastLogin').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

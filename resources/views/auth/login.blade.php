@@ -8,6 +8,15 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
+                    <div>
+                        <fast-login
+                            class="btn btn-lg btn-success"
+                            :fast-login='@json(route('fastlogin.login'))'
+                            :fast-login-details='@json( route('fastlogin.login.details'))'
+                        >
+                            Войти с помощью TouchId
+                        </fast-login>
+                    </div>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

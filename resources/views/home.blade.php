@@ -16,8 +16,15 @@
 
                     {{ __('You are logged in!') }}
                 </div>
-                <example-component></example-component>
-                <test-component></test-component>
+{{--                <example-component></example-component>--}}
+{{--                <test-component></test-component>--}}
+                <fast-registration
+                    class="btn btn-lg btn-info m-1"
+                    :fast-login-create='@json(route('fastlogin.create'))'
+                    :fast-login-create-details='@json(route('fastlogin.create.details'))'
+                >
+                    Подключить TouchID
+                </fast-registration>
             </div>
         </div>
     </div>

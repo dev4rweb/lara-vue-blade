@@ -23,12 +23,12 @@
     <div id="app">
         @include('parts.header')
 
-        <div class="sidebar-wrapper">
-            @include('parts.sidebar')
+{{--        <div class="sidebar-wrapper">--}}
+{{--            @include('parts.sidebar')--}}
             <main class="py-4">
                 @yield('content')
             </main>
-        </div>
+{{--        </div>--}}
 
         @include('parts.footer')
     </div>
