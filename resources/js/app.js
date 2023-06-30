@@ -34,6 +34,8 @@ Vue.component('vuex-page', require('./views/Vuex-Page').default);
 Vue.component('post-form', require('./components/PostForm').default);
 Vue.component('fast-registration', require('./auth/FastRegistration').default);
 Vue.component('fast-login', require('./auth/FastLogin').default);
+Vue.component('own-touch-register', require('./auth/OwnTouchRegister').default);
+Vue.component('own-touch-login', require('./auth/OwnTouchLogin').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
