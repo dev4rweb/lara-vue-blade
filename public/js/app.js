@@ -5517,10 +5517,10 @@ __webpack_require__.r(__webpack_exports__);
         // the user has been logged in
         console.log('fastLoginHandler res', res);
         _this.message = 'Ок';
-        // window.location.reload()
+        window.location.href = '/home';
       })["catch"](function (err) {
         console.error('fastLoginHandler err', err);
-        _this.message = 'Error';
+        _this.message = 'Ошибка';
       });
     }
   }

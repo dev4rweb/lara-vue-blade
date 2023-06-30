@@ -31,10 +31,10 @@ export default {
                 // the user has been logged in
                 console.log('fastLoginHandler res', res)
                 this.message = 'Ок'
-                // window.location.reload()
+                window.location.href = '/home'
             }).catch(err => {
                 console.error('fastLoginHandler err', err)
-                this.message = 'Error'
+                this.message = 'Ошибка'
             });
         }
     }
